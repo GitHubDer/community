@@ -1,23 +1,16 @@
 ## 码匠社区
 
 ## 资料
-<<<<<<< HEAD
-https://baidu.com
-https://www.google.com
-https://v3.bootcss.com
-https://spring.io/guides
-https://elasticsearch.cn/explore
-https://spring.io/guides/gs/serving-web-content
-https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys
+[百度](https://baidu.com)\
+[谷歌](https://www.google.com)\
+[Spring 文档](https://spring.io/guides)\
+[es社区](https://elasticsearch.cn/explore)\
+[Spring Web](https://spring.io/guides/gs/serving-web-content)\
+[Github deploy key](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys)\
+[Bootstrap](https://v3.bootcss.com/getting-started)\
+[Github OAuth](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)
+
 
 ## 工具
-https://git-scm.com/download
-=======
-https://spring.io/guides
-https://spring.io/guides/gs/serving-web-content/
-https://elasticsearch.cn/explore
-https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys
-
-## 工具
-https://git-scm.com/download
->>>>>>> 30b245c61b025740d24fedff68d9a3f3e9bbd93b
+[Git](https://git-scm.com/download)\
+[Visual-Paradigm](https://www.visual-paradigm.com)
