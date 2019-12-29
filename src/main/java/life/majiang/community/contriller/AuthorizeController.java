@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
@@ -35,7 +37,7 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-                           HttpServletRequest request) {
+                           HttpServletResponse response) {
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
         accessTokenDTO.setClient_secret(clientSecret);
@@ -43,19 +45,21 @@ public class AuthorizeController {
         accessTokenDTO.setRedirect_uri(redirectUri);
         accessTokenDTO.setState(state);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
+        //Github登录成功以后，进行判断并获取到用户信息，获取到用户信息之后生成一个token，生成token之后把token放到user对象里面，存储到数据库中，并且把token放到cookie里面。
         GithubUser githubUser = githubProvider.getUser(accessToken);
         System.out.println(githubUser.getName());
         if (githubUser != null) {
             //userMapper.insert(new User()); 用快捷键Ctrl+Alt+V能自动拖取一个变量生成User user = new User();userMapper.insert(user);
             User user = new User();
-            user.setToken(UUID.randomUUID().toString());
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
             user.setName(githubUser.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             userMapper.insert(user);
+            response.addCookie(new Cookie("token", token));
             //登录成功，写cookie和session
-            request.getSession().setAttribute("user", githubUser);
             return "redirect:/"; //加了redirect前缀的话会把地址全部去掉直接跳转重定向到index页面去
         } else {
             //登录失败，重新登录
