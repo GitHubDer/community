@@ -28,18 +28,18 @@ public class IndexController {
     public String index(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         //for循环数组，看看for循环里面的key
-        for (Cookie cookie : cookies) { //看看cookie里面都有什么东西
-            if (cookie.getName().equals("token")) { //看看cookie里面的name是不是等于token
-                String token = cookie.getValue();
-                User user = userMapper.findByToken(token); //此时已经拿到token了，到数据库里面去查有没有这条记录
-                if (user != null) { //如果user不为空的时候就把user放到session里面去，让页面能够判断是否登录成功以便展示"我"还是"登录"
-                    request.getSession().setAttribute("user", user);
+        if (cookies != null) {
+            for (Cookie cookie : cookies) { //看看cookie里面都有什么东西
+                if (cookie.getName().equals("token")) { //看看cookie里面的name是不是等于token
+                    String token = cookie.getValue();
+                    User user = userMapper.findByToken(token); //此时已经拿到token了，到数据库里面去查有没有这条记录
+                    if (user != null) { //如果user不为空的时候就把user放到session里面去，让页面能够判断是否登录成功以便展示"我"还是"登录"
+                        request.getSession().setAttribute("user", user);
+                    }
+                    break;
                 }
-                break;
             }
         }
-
-
 
         return "index";
     }
