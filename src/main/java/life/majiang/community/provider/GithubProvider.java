@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 /**
- * Create by D on 2019/12/21--21:08
+ * Created by D on 2019/12/21--21:08
  */
 @Component //对象能直接实例化放到池里面
 public class GithubProvider {
@@ -41,7 +41,7 @@ public class GithubProvider {
         try {
             Response response = client.newCall(request).execute();
             String string = response.body().string();
-            GithubUser githubUser = JSON.parseObject(string, GithubUser.class);//把一个String JSON的对象去自动转换成解析成JAva的类对象
+            GithubUser githubUser = JSON.parseObject(string, GithubUser.class);//把一个String JSON的对象去自动转换成解析成Java的类对象
             return githubUser;
         } catch (IOException e) {
             e.printStackTrace();
