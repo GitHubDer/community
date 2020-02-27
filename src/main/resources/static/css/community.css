@@ -34,6 +34,22 @@ body {
 .question-title {
     margin-top: 25px;
 }
+.question-tag {
+    margin-right: 5px;
+}
+
+.question-related {
+    line-height: 20px;
+    margin-left: 0;
+    /*list-style: none;*/
+    padding-left: 0;
+}
+
+.advertising {
+    border: 1px solid #999;
+    text-align: center;
+    color: #999;
+}
 
 .community-menu {
     display: block;
@@ -42,7 +58,7 @@ body {
     margin-bottom: 15px;
     width: 50px;
     height: 20px;
-    margin-top: 100px;
+    float: left;
 }
 
 .jumbotron {

@@ -24,7 +24,7 @@ public class IndexController {
     @GetMapping("/") //一个反斜杠的时候代表返回默认路径，即templates下的index
     public String index(Model model,
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
-                        @RequestParam(name = "size", defaultValue = "5") Integer size) {
+                        @RequestParam(name = "size", defaultValue = "10") Integer size) {
         PaginationDTO paginationDTO = questionService.list(page, size);
         model.addAttribute("pagination", paginationDTO); //可以往前端传数据
         return "index";

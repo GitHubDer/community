@@ -10,19 +10,23 @@ import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.model.Question;
 import life.majiang.community.model.QuestionExample;
 import life.majiang.community.model.User;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by D on 2020/1/2--14:36
  */
 @Service
-public class QuestionService { //QuestionService在项目这里不仅仅可以使用QuestionMapper也可以使用UserMapper，起到一个组装的作用，当一个请求需要组装User的值同时也需要组装Question的时候就需要一个中间层
+public class
+QuestionService { //QuestionService在项目这里不仅仅可以使用QuestionMapper也可以使用UserMapper，起到一个组装的作用，当一个请求需要组装User的值同时也需要组装Question的时候就需要一个中间层
 
     @Autowired(required = false)
     private QuestionMapper questionMapper;
@@ -56,10 +60,12 @@ public class QuestionService { //QuestionService在项目这里不仅仅可以�
         }
 
         paginationDTO.setPagination(totalPage, page);
-
         //size*(page-1)
         Integer offset = size * (page - 1);
-        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
+        QuestionExample questionExample = new QuestionExample();
+//        questionExample.createCriteria();
+        questionExample.setOrderByClause("gmt_create desc"); //让首页的问题按创建时间倒序排序
+        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(questionExample, new RowBounds(offset, size));
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
         // 循环的去查询user的，把user对象赋值到questionMapper去
@@ -171,5 +177,25 @@ public class QuestionService { //QuestionService在项目这里不仅仅可以�
         question.setId(id);
         question.setViewCount(1);
         questionExtMapper.incView(question);
+    }
+
+    // 在问题页面右侧相关问题下实现同标签问题
+    public List<QuestionDTO> selectRelated(QuestionDTO queryDTO) {
+        if(StringUtils.isBlank(queryDTO.getTag())) {
+            return new ArrayList<>();
+        }
+        String[] tags = StringUtils.split(queryDTO.getTag(), ",");
+        String regexpTag = Arrays.stream(tags).collect(Collectors.joining("|"));
+        Question question = new Question();
+        question.setId(queryDTO.getId());
+        question.setTag(regexpTag);
+
+        List<Question> questions = questionExtMapper.selectRelated(question);
+        List<QuestionDTO> questionDTOS = questions.stream().map(q -> {
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(q, questionDTO);
+            return questionDTO;
+        }).collect(Collectors.toList());
+        return questionDTOS;
     }
 }
