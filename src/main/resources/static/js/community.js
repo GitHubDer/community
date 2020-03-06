@@ -117,3 +117,22 @@ function collapseComments(e) {
         }
     }
 }
+
+function showSelectTag() {
+    $("#select-tag").show();
+}
+
+/**
+ * 选中并点击标签输入到添加标签栏里
+ */
+function selectTag(e) {
+    var value = e.getAttribute("data-tag");
+    var previous = $("#tag").val();
+    if (previous.indexOf(value) == -1) {
+        if (previous) {
+            $("#tag").val(previous + ',' + value);
+        } else {
+            $("#tag").val(value);
+        }
+    }
+}
