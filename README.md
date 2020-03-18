@@ -1,4 +1,4 @@
-## 码匠社区
+## 社区
 
 ## 资料
 [百度](https://baidu.com)\
@@ -33,4 +33,10 @@ create table USER
 ```bash
 mvn flyway:migrate
 mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+```
+```git command
+git status
+git add .
+git commit -m 'commit name'
+git push -u origin master
 ```

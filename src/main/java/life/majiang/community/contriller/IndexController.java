@@ -1,6 +1,8 @@
 package life.majiang.community.contriller;
 
 import life.majiang.community.dto.PaginationDTO;
+import life.majiang.community.model.Comment;
+import life.majiang.community.service.NotificationService;
 import life.majiang.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,12 +22,17 @@ public class IndexController {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private NotificationService notificationService;
+    private Comment user;
+
     //当访问首页的时候循环去看cookie里面的内容，找到cookie=token的cookie，并到数据库里面去查这条记录，如果有cookie这条记录则把user(PS:token已被实例化为User)
     @GetMapping("/") //一个反斜杠的时候代表返回默认路径，即templates下的index
     public String index(Model model,
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
                         @RequestParam(name = "size", defaultValue = "10") Integer size) {
         PaginationDTO paginationDTO = questionService.list(page, size);
+        Long unreadCount = notificationService.unreadCount(user.getId());
         model.addAttribute("pagination", paginationDTO); //可以往前端传数据
         return "index";
     }

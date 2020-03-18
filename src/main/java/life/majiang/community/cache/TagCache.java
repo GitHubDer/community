@@ -17,12 +17,12 @@ public class TagCache {
         List<TagDTO> tagDTOS = new ArrayList<>();
         TagDTO program = new TagDTO();
         program.setCategoryName("开发语言");
-        program.setTags(Arrays.asList("JavaScript", "php", "css", "html", "html5", "java", "node.js", "python", "c++", "c", "golang", "objectice-c", "typescript", "shell", "swift", "c#", "sass", "ruby", "bash", "less", "asp.net", "lua", "scala", "coffeeScript", "actionScript", "rust", "eriang", "perl"));
+        program.setTags(Arrays.asList("JavaScript", "php", "css", "html", "html5", "Java", "node.js", "python", "c++", "c", "golang", "objectice-c", "typescript", "shell", "swift", "c#", "sass", "ruby", "bash", "less", "asp.net", "lua", "scala", "coffeeScript", "actionScript", "rust", "eriang", "perl"));
         tagDTOS.add(program);
 
         TagDTO framework = new TagDTO();
         framework.setCategoryName("平台框架");
-        framework.setTags(Arrays.asList("laravel", "spring", "express", "django", "flask", "yii", "ruby-rails", "tornado", "koa", "struts"));
+        framework.setTags(Arrays.asList("laravel", "Spring", "Spring Boot", "Spring MVC", "Spring Cloud", "express", "django", "flask", "yii", "ruby-rails", "tornado", "koa", "struts"));
         tagDTOS.add(framework);
 
         TagDTO server = new TagDTO();

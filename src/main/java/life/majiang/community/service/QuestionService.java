@@ -65,7 +65,7 @@ QuestionService { //QuestionService在项目这里不仅仅可以使用QuestionM
         QuestionExample questionExample = new QuestionExample();
 //        questionExample.createCriteria();
         questionExample.setOrderByClause("gmt_create desc"); //让首页的问题按创建时间倒序排序
-        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(questionExample, new RowBounds(offset, size));
+        List<Question> questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
         // 循环的去查询user的，把user对象赋值到questionMapper去
@@ -76,7 +76,7 @@ QuestionService { //QuestionService在项目这里不仅仅可以使用QuestionM
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
         return paginationDTO;
     }
 
@@ -84,6 +84,7 @@ QuestionService { //QuestionService在项目这里不仅仅可以使用QuestionM
         PaginationDTO paginationDTO = new PaginationDTO();
 
         Integer totalPage;
+
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria().andCreatorEqualTo(userId);
         Integer totalCount = (int) questionMapper.countByExample(new QuestionExample());
@@ -108,7 +109,7 @@ QuestionService { //QuestionService在项目这里不仅仅可以使用QuestionM
         Integer offset = size * (page - 1);
         QuestionExample example = new QuestionExample();
         example.createCriteria().andCreatorEqualTo(userId);
-        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(example, new RowBounds(offset, size));
+        List<Question> questions = questionMapper.selectByExampleWithRowbounds(example, new RowBounds(offset, size));
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
         // 循环的去查询user的，把user对象赋值到questionMapper去
@@ -119,7 +120,7 @@ QuestionService { //QuestionService在项目这里不仅仅可以使用QuestionM
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
         return paginationDTO;
 
     }
