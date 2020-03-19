@@ -62,12 +62,13 @@ public class CommentService {
 
             // 回复问题
             Question question = questionMapper.selectByPrimaryKey(dbComment.getParentId());
+            // 验证问题存不存在，存在则拿到问题的名字
             if (question == null) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
             commentMapper.insert(comment);
 
-            //在一级评论里二级评论按钮显示二级评论总数
+            //在一级评论里二级评论按钮显示二级评论总数(增加评论数)
             Comment parentComment = new Comment();
             parentComment.setId(comment.getParentId());
             parentComment.setCommentCount(1);
@@ -86,7 +87,7 @@ public class CommentService {
             questionExtMapper.incCommentCount(question);
 
             //创建通知
-            createNotify(comment,question.getCreator(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_QUESTION, question.getId());
+            createNotify(comment, question.getCreator(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_QUESTION, question.getId());
         }
     }
 

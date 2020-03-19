@@ -30,6 +30,7 @@ public class NotificationService {
 
     public PaginationDTO list(Long userId, Integer page, Integer size) {
 
+        //拿到通知评论的总数
         PaginationDTO<NotificationDTO> paginationDTO = new PaginationDTO<>();
 
         Integer totalPage;
@@ -58,6 +59,7 @@ public class NotificationService {
         Integer offset = size * (page - 1);
         NotificationExample example = new NotificationExample();
         example.createCriteria().andReceiverEqualTo(userId);
+        example.setOrderByClause("gmt_create desc"); //让最新回复未读条数显示在最前面
         List<Notification> notifications = notificationMapper.selectByExampleWithRowbounds(example, new RowBounds(offset, size));
 
         if (notifications.size() == 0) {
@@ -83,7 +85,7 @@ public class NotificationService {
         notificationExample.createCriteria().andReceiverEqualTo(userId).andStatusEqualTo(NotificationStatusEnum.UNREAD.getStatus());
         return notificationMapper.countByExample(notificationExample);
     }
-
+    //我的通知判断是否为账号本人
     public NotificationDTO read(Long id, User user) {
         Notification notification = notificationMapper.selectByPrimaryKey(id);
         //当消息为空的时候
