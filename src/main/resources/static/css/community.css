@@ -65,6 +65,7 @@ question-tag {
     border: 1px solid #999;
     text-align: center;
     color: #999;
+    background-image: url("/../images/hope.jpg");
 }
 
 .publish-tag-tab {

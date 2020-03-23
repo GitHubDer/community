@@ -9,8 +9,8 @@
 [Github deploy key](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys)\
 [Bootstrap](https://v3.bootcss.com/getting-started)\
 [Github OAuth](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)\
-[Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#setting-attribute-values)
-
+[Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#setting-attribute-values)\
+[Markdown 插件](http://editor.md.ipandao.com/)
 
 ## 工具
 [Git](https://git-scm.com/download)\
