@@ -31,6 +31,7 @@
                     <label for="description">问题补充（必填，请参照右侧提示）:</label>
                     <textarea name="description" id="description" th:text="${description}" style="display: none;" class="form-control" cols="30" rows="10"></textarea>
                 </div>
+                <!--Markdown编辑框-->
                 <script type="text/javascript">
                     $(function () {
                         var editor = editormd("question-editor", {

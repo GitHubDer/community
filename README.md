@@ -14,9 +14,10 @@
 
 ## 工具
 [Git](https://git-scm.com/download)\
-[Visual-Paradigm](https://www.visual-paradigm.com)
-[Flyway](https://flywaydb.org/getstarted/firststeps/maven)
-[Lombok](https://www.projectlombok.org/)
+[Visual-Paradigm](https://www.visual-paradigm.com)\
+[Flyway](https://flywaydb.org/getstarted/firststeps/maven)\
+[Lombok](https://www.projectlombok.org/)\
+[inconfont](https://www.iconfont.cn/)
 
 ## 脚本
 ```sql

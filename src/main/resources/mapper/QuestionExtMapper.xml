@@ -33,4 +33,24 @@
   </select>
 
 
+  <select id="countBySearch" parameterType="life.majiang.community.dto.QuestionQueryDTO" resultType="java.lang.Integer">
+    select count(*) from QUESTION
+    <where>
+      <if test="search != null">
+        and title regexp #{search}
+      </if>
+    </where>
+  </select>
+
+
+  <select id="selectBySearch" parameterType="life.majiang.community.dto.QuestionQueryDTO" resultMap="BaseResultMap">
+    select * from QUESTION
+    <where>
+      <if test="search != null">
+        and title regexp #{search}
+      </if>
+    </where>
+    order by gmt_create desc limit #{page}, #{size}
+  </select>
+
 </mapper>
