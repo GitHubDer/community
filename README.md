@@ -1,5 +1,20 @@
-## 社区
+## 滑稽社区
 
+## 部署
+### 依赖
+- Git
+- JDK
+- Maven
+- MySQL
+### 步骤
+- yum update
+- install git
+- mkdir App
+- cd App
+- git clone Github地址
+- yum install maven
+- mav -v
+- mvn package
 ## 资料
 [百度](https://baidu.com)\
 [谷歌](https://www.google.com)\
